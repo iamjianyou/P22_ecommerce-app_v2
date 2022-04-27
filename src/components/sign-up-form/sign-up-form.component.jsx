@@ -1,5 +1,8 @@
 import { useState } from "react"
 import FormInput from "../form-input/form-input.component"
+import Button from '../button/button.component';
+import './sign-up-form.styles.scss'
+
 import {
     createAuthUserWithEmailAndPassword,
     createUserDocumentFromAuth,
@@ -57,8 +60,9 @@ const SignUpForm = () => {
 
 
     return (
-        <div>
-            <h1>Sign up wiht you email and password</h1>
+        <div className="sign-up-container">
+            <span>Sign up wiht you email and password</span>
+            <h2> Don't have an account?</h2>
             <form onSubmit={handleSubmit}>
                 <FormInput label="Display Name" type="text" required onChange={handleChange} name="displayName" value={displayName}/>
 
@@ -68,7 +72,7 @@ const SignUpForm = () => {
                 
                 <FormInput label="Confirm Password" type="password" required onChange={handleChange} name="confirmPassword" value={confirmPassword}/>
 
-                <button type="submit"> Sign Up </button>
+                <Button buttonType='invert' type='submit'>Sign Up</Button>
             </form>
         </div>
     )
