@@ -3,12 +3,12 @@ import { Outlet, Link } from 'react-router-dom'
 import { ReactComponent as CrownLogo } from '../../assets/crownLogo.svg'
 import {UserContext} from '../../contexts/user.context'
 import './navigation.styles.scss'
-import { SignOutUser } from '../../Utils/firebase/firebase.utils'
+import { signOutUser } from '../../Utils/firebase/firebase.utils'
 
 const Navigation = () => {
     const { currentUser, setCurrentUser } = useContext(UserContext)
     const signOutHandler = async () => {
-        await SignOutUser()
+        await signOutUser()
         setCurrentUser(null)
 
     }

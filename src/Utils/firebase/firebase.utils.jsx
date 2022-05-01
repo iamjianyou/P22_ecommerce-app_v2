@@ -6,6 +6,7 @@ import { getAuth,
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   signOut,
+  onAuthStateChanged,
 } from 'firebase/auth'
 
 import {  
@@ -39,6 +40,7 @@ googleProvider.setCustomParameters({
 });
 
 export const auth = getAuth();
+console.log('get auth -> ', auth)
 export const signInwithGooglePopup = () => signInWithPopup(auth, googleProvider);
 export const signInWithGoogleRedirect = () => signInWithRedirect(auth, googleProvider)
 
@@ -88,5 +90,11 @@ export const signInAuthUserWithEmailAndPassword = async (email, password) => {
   return await signInWithEmailAndPassword(auth, email, password);
 };
 
-export const SignOutUser = async() => await signOut(auth)
+export const signOutUser = async() => await signOut(auth)
 
+// user signIn/signOut means Auth change, both change will get Callback invoked
+// whenever instantiated this function, it need a call back to the inside function
+export const onAuthStateChangedListener = (callback) =>{
+  onAuthStateChanged(auth, callback);
+}
+  
