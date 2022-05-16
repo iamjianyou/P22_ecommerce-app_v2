@@ -6,16 +6,15 @@ import { createContext, useState, useEffect} from "react";
 const addCartItem = (cartItems, productToAdd) => {
     // find if cartItems contains productToAdd
     const existingCartItems = cartItems.find((cartItem) => cartItem.id === productToAdd.id);
-
+    
     // if found , increment quantity
 
     if (existingCartItems){
         return cartItems.map((cartItem) => cartItem.id === productToAdd.id // if match return a new cartItem object
         ? {...cartItem, quantity: cartItem.quantity + 1 } // return a brand new object by spreading through all of the old properties, except quantity will add a new one.
-        : cartItem ) // if not match, so return the origianl one
-
-        
-    }
+        : cartItem 
+    ); // if not match, so return the origianl one   
+}
 
     //return new array with modified cartitems/ new cart item
 
@@ -25,7 +24,36 @@ const addCartItem = (cartItems, productToAdd) => {
     * {...productToAdd} : add as an additional (new)product
     * quantity: 1  ---> add this quantity of one
     */
-    return[...cartItems, {...productToAdd, quantity: 1 }];
+    return [...cartItems, { ...productToAdd, quantity: 1 }];
+}
+
+/** ******************************************************************************************************************************** */
+
+
+const removeCartItem = (cartItems, cartItemToRemove) => {
+
+    // find the cart item to remove
+    const existingCartItem = (cartItems.find(
+        (cartItem) => cartItem.id === cartItemToRemove.id)
+        );
+
+    // check if quantity is equal to 1, if it is , remove it from the cart
+    // by using Filter that gives it back a new array where the array is going to have removed whatever matches
+    // keep the value: if carItemId not equals to cartItemToRemove.id
+    // remove the value: carItemId eauals to cartItemToRemove
+    if (existingCartItem.quantity === 1) {
+        return cartItems.filter(cartItem => cartItem.id !== cartItemToRemove.id); 
+    }
+
+    return cartItems.map((cartItem) =>
+        cartItem.id === cartItemToRemove.id
+        ? {...cartItem, quantity: cartItem.quantity - 1}
+        : cartItem
+    );
+    // return cartItems.map((cartItem) => cartItem.id === productToAdd.id // if match return a new cartItem object
+    //     ? {...cartItem, quantity: cartItem.quantity + 1 } // return a brand new object by spreading through all of the old properties, except quantity will add a new one.
+    //     : cartItem ) // if not match, so return the origianl one
+
 }
 
 export const CartContext = createContext({
@@ -58,8 +86,11 @@ export const CartProvider =({children}) => {
     const addItemToCart = (productToAdd) => {
         setCartItems(addCartItem(cartItems, productToAdd));
     }
+    const removeItemToCart = (cartItemToRemove) => {
+        setCartItems(removeCartItem(cartItems, cartItemToRemove));
+    }
 
-    const value = {isCartOpen, setIsCartOpen, addItemToCart, cartItems, cartCount};
+    const value = {isCartOpen, setIsCartOpen, addItemToCart, removeItemToCart, cartItems, cartCount};
     return (
         <CartContext.Provider value={value}> {children} </CartContext.Provider>
     )
