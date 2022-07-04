@@ -46,7 +46,7 @@ googleProvider.setCustomParameters({
 
 export const auth = getAuth();
 console.log('get auth -> ', auth)
-export const signInwithGooglePopup = () => signInWithPopup(auth, googleProvider);
+export const signInWithGooglePopup = () => signInWithPopup(auth, googleProvider);
 export const signInWithGoogleRedirect = () => signInWithRedirect(auth, googleProvider)
 
 // Firestore
