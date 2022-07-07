@@ -12,20 +12,22 @@ import { signOutUser } from '../../Utils/firebase/firebase.utils';
 
 import {
   NavigationContainer,
-  LogoContainer,
   NavLinks,
   NavLink,
+  LogoContainer,
 } from './navigation.styles';
 
 const Navigation = () => {
   const { currentUser } = useContext(UserContext);
   const { isCartOpen } = useContext(CartContext);
 
+  console.log('currentUser --> ', currentUser)
+
   return (
     <Fragment>
       <NavigationContainer>
         <LogoContainer to='/'>
-          <CrwnLogo />
+          <CrwnLogo className='logo' />
         </LogoContainer>
         <NavLinks>
           <NavLink to='/shop'>SHOP</NavLink>
