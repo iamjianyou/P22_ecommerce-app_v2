@@ -4,6 +4,7 @@
 
 import { createContext, useEffect, useReducer } from 'react';
 import { onAuthStateChangedListener, createUserDocumentFromAuth} from '../Utils/firebase/firebase.utils';
+import createAction from '../Utils/reducer/reducer.utils';
 
 // As the actual value to get access
 export const UserContext = createContext({
@@ -21,9 +22,9 @@ const INITIAL_STATE = {
 };
 
 const userReducer = (state, action ) => {
-  console.log('state--> ', state)
-  console.log('dispatched')
-  console.log('action -> ', action)
+  // console.log('state--> ', state)
+  // console.log('dispatched')
+  // console.log('action -> ', action)
   const {type, payload} = action;
   // return back an object with those valuses depending on the type
   // ...state => spread through the previous state in all of the current values for the object
@@ -52,7 +53,9 @@ const userReducer = (state, action ) => {
     console.log('currentUser --> ', currentUser)
 
     const setCurrentUser = (user) => {
-      dispatch({type: USER_ACTION_TYPES.SET_CURRENT_USER, payload: user} )
+      dispatch(
+        createAction(USER_ACTION_TYPES.SET_CURRENT_USER, user)
+      )
     }
 
 
