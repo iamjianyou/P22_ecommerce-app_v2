@@ -26,3 +26,9 @@ export const UserContext = createContext({
     return <UserContext.Provider value={value}>{children}</UserContext.Provider>;
   };
 
+
+  /** Normally ContextAPI and Redux are not used at the same time
+   *  Reason: Redux concept is that all of your state should be stored at one place --- Redux store.
+   *  If user data gets stored in context and redux which will lead to confusing.
+   *
+   */
