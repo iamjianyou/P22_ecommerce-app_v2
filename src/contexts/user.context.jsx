@@ -2,6 +2,11 @@
  *  And use reducers inside of context
 */
 
+// Use contexts with Reducers
+/** The components drive actions into reducers, 
+ * the reducers drive their corresponding values to their components.
+*/
+
 import { createContext, useEffect, useReducer } from 'react';
 import { onAuthStateChangedListener, createUserDocumentFromAuth} from '../Utils/firebase/firebase.utils';
 import createAction from '../Utils/reducer/reducer.utils';
