@@ -1,11 +1,13 @@
 import { Fragment, useContext } from 'react';
 import { Outlet } from 'react-router-dom';
+import { useSelector } from 'react-redux'
 
 import CartIcon from '../../components/cart-icon/cart-icon.component';
 import CartDropdown from '../../components/cart-dropdown/cart-dropdown.component';
 
-import { UserContext } from '../../contexts/user.context';
+// import { UserContext } from '../../contexts/user.context';
 import { CartContext } from '../../contexts/cart.context';
+import { selectCurrentUser } from '../../store/user/user.selector';
 
 import { ReactComponent as CrwnLogo } from '../../assets/crownLogo.svg'
 import { signOutUser } from '../../Utils/firebase/firebase.utils';
@@ -18,7 +20,11 @@ import {
 } from './navigation.styles';
 
 const Navigation = () => {
-  const { currentUser } = useContext(UserContext);
+  // const { currentUser } = useContext(UserContext);
+  /** to interact from a component with the Redux Store
+   * extracts off the value you want from the whole entire Redux sotre.
+   * */
+  const currentUser = useSelector(selectCurrentUser);
   const { isCartOpen } = useContext(CartContext);
 
   return (

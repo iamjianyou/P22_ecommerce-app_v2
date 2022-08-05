@@ -1,7 +1,4 @@
-/** Action types */
-export const USER_ACTION_TYPES = {
-  SET_CURRENT_USER: 'SET_CURRENT_USER',
-};
+import { USER_ACTION_TYPES } from '../../store/user/user.types'
 
 const INITIAL_STATE = {
   currentUser: null,
@@ -24,7 +21,7 @@ Actions pass to every single reducer
 // we need to 
 
 
-export const userReducer = (state = INITIAL_STATE, action ) => {
+export const userReducer = (state = INITIAL_STATE, action={} ) => {
 
   const {type, payload} = action;
   // return back an object with those valuses depending on the type

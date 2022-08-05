@@ -5,7 +5,8 @@
 */
 
 import { compose, applyMiddleware } from 'redux';
-import {configureStore} from '@reduxjs/toolkit';
+import { legacy_createStore as createStore} from 'redux'
+// import {configureStore} from '@reduxjs/toolkit';
 
 // This logger is essentially something that allows us to see what the state looks like before an action
 // is dispatched, what the action is, and then how the state in turn, looks after the action.
@@ -20,15 +21,16 @@ import { rootReducer } from './root-reducer' // root-reducer
  */
 const middlewares = [logger]
 
+
 const composedEnhances = compose(applyMiddleware(...middlewares))
+
 /**
  * here's what fundamentally creates a store ? 
  * This store is just in order to
  * facilitate the movement and passing of actions through these reducers.
  */
 // export const store = configureStore(rootReducer, undefined, composedEnhances);
-export const store = configureStore({
-    reducer: rootReducer,
-    middlewares: composedEnhances,
-})
+
+
+export const store = createStore(rootReducer, undefined, composedEnhances);
 
