@@ -1,5 +1,7 @@
+/** Reducer always stores the most basic format, 
+ * essentially, it is the data you get from your API
+ */
 import { CATEGORIES_ACTION_TYPES } from "./categories.type";
-
 
 export const CATEGORIES_INITIAL_STATE = {
     categoriesMap: {}
