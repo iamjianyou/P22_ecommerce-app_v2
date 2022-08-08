@@ -5,4 +5,14 @@
  * on the base format of the data you have
  * 
  * */
-export const selectCategoriesMap = (state) => state.categories.categoriesMap;
+
+export const selectCategoriesMap = (state) => {
+  const categoriesMap = state.categories.categories.reduce(
+    (acc, { title, items }) => {
+      acc[title.toLowerCase()] = items;
+      return acc;
+    },
+    {}
+  );
+  return categoriesMap;
+};
