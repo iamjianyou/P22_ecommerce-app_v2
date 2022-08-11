@@ -1,3 +1,22 @@
+
+import { createSelector } from 'reselect';
+
+const selectCategoryReducer = (state) => {
+  console.log('selector 000 fireed')
+  return state.categories;
+
+}
+
+export const selectCategories = createSelector(
+  [selectCategoryReducer],
+  (categoriesSlice) => 
+    // console.log('selector 1: fired')
+    categoriesSlice.categories
+
+);
+
+
+
 /** With a selector, you can transform 
  * that data into the final shape that you want it to be 
  * 
@@ -5,14 +24,13 @@
  * on the base format of the data you have
  * 
  * */
+export const selectCategoriesMap = createSelector(
+  [selectCategories],
+  (categories) =>
 
-export const selectCategoriesMap = (state) => {
-  const categoriesMap = state.categories.categories.reduce(
-    (acc, { title, items }) => {
+    categories.reduce((acc, category) => {
+      const { title, items } = category;
       acc[title.toLowerCase()] = items;
       return acc;
-    },
-    {}
-  );
-  return categoriesMap;
-};
+    }, {})
+);

@@ -15,11 +15,47 @@ import logger from 'redux-logger';
 import { rootReducer } from './root-reducer' // root-reducer
 
 
+/** demo */
+
+const curryFunc = (a) => (b, c) => {
+  // a + b - c
+}
+
+const withA = curryFunc(3) // 
+
+withA(2, 4);// 3 + 2 - 4
+
+
+
+
+
+
 /**
  * Middle wears our kind of like little library helpers that run before an action hits the reducer.
    So whenever you dispatch an action before that action hits the reducers, it hits the middleware first.
  */
-const middlewares = [logger]
+
+/** The first function receives the store object, 
+  this return the 'next' method that allows us to pass on the action.
+ and /return/recived the action.
+*/
+ const loggerMiddleware = (store) => (next) => (action) => {
+    // 
+    if (!action.type){
+      return next(action)
+    }
+    console.log('action type :', action.type)
+    console.log('playload: ', action.payload)
+    console.log('current state: ', store.getState())
+
+    next(action);
+
+    console.log('next state: ', store.getState())
+  }
+
+
+  const middlewares = [loggerMiddleware]
+// const middlewares = [logger]
 
 
 const composedEnhances = compose(applyMiddleware(...middlewares))
