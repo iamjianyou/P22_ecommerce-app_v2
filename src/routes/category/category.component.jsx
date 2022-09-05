@@ -7,22 +7,31 @@ import { selectCategoriesMap } from '../../store/categories/categories.selector'
 import './category.styles.scss'
 import ProductCard from '../../components/product-card/product-card.component'
 
-const Category = () => {
-    const { category } = useParams();
-    const categoriesMap = useSelector(selectCategoriesMap);
-    console.log('rendering category');
-    const [products, setProducts] = useState(categoriesMap[category]);
+// const Category = () => {
+//     const { category } = useParams();
+//     const categoriesMap = useSelector(selectCategoriesMap);
+//     //console.log('rendering category');
+//     const [products, setProducts] = useState(categoriesMap[category]);
     
-    console.log('redner/re-rendering category component');
+   //console.log('redner/re-rendering category component');
 
 
     // const { categoriesMap } = useContext(CategoriesContext)
     // const products = categoriesMap[category]
     // const [ products, setProducts ] = useState(categoriesMap[category])
-    useEffect(() => {
-        console.log('efffect fired calling set products')
-        setProducts(categoriesMap[category]);
-      }, [category, categoriesMap]);
+    // useEffect(() => {
+    //     // console.log('efffect fired calling set products')
+    //     setProducts(categoriesMap[category]);
+    //   }, [category, categoriesMap]);
+
+    const Category = () => {
+        const { category } = useParams();
+        const categoriesMap = useSelector(selectCategoriesMap);
+        const [products, setProducts] = useState(categoriesMap[category]);
+      
+        useEffect(() => {
+          setProducts(categoriesMap[category]);
+        }, [category, categoriesMap]);
 
     return(
         <Fragment> 
