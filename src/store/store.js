@@ -6,6 +6,10 @@
 
 import { compose, applyMiddleware } from 'redux';
 import { legacy_createStore as createStore} from 'redux'
+import { persistStore, persistReducer } from 'redux-persist'
+import storage from 'redux-persist/lib/storage';
+
+
 // import {configureStore} from '@reduxjs/toolkit';
 
 // This logger is essentially something that allows us to see what the state looks like before an action
@@ -54,7 +58,17 @@ withA(2, 4);// 3 + 2 - 4
   }
 
 
-  const middlewares = [loggerMiddleware]
+
+/** Redux-persist */
+const persistConfig = {
+  key: 'root',
+  storage,
+  blacklist: ['user']
+}
+
+const persistedReducer = persistReducer(persistConfig, rootReducer)
+
+const middlewares = [loggerMiddleware]
 // const middlewares = [logger]
 
 
@@ -68,5 +82,6 @@ const composedEnhances = compose(applyMiddleware(...middlewares))
 // export const store = configureStore(rootReducer, undefined, composedEnhances);
 
 
-export const store = createStore(rootReducer, undefined, composedEnhances);
+export const store = createStore(persistedReducer, undefined, composedEnhances);
+export const persistor = persistStore(store);
 

@@ -10,3 +10,9 @@ export const rootReducer = combineReducers({
     categories: categoriesReducer,
     cart: cartReducer,
 });
+
+
+/*** Redux Persistence ***/
+/** Redux persist is a tool that
+* allows us to persist the reducer values inside of local storage
+*/
