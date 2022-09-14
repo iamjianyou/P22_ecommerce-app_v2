@@ -70,7 +70,7 @@ export const addCollectionAndDocuments= async (collectionKey, objectsToAdd) => {
 export const getCategoriesAndDocuments= async () => {
   const collectionRef = collection(db, 'categories');
   const q = query(collectionRef);
-
+  // await Promise.reject(new Error('Cannot find categories oops!'));
   const querySnapshot = await getDocs(q);
   return querySnapshot.docs.map((doc) => doc.data());
 };
