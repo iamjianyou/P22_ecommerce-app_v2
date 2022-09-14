@@ -10,6 +10,7 @@ import { persistStore, persistReducer } from 'redux-persist'
 import storage from 'redux-persist/lib/storage';
 import logger from 'redux-logger'; 
 import { rootReducer } from './root-reducer' // root-reducer
+import thunk from 'redux-thunk';
 
 // import {configureStore} from '@reduxjs/toolkit';
 // This logger is essentially something that allows us to see what the state looks like before an action
@@ -17,20 +18,19 @@ import { rootReducer } from './root-reducer' // root-reducer
 
 
 
-
-
-
 /** Redux-persist */
 const persistConfig = {
   key: 'root',
   storage,
-  blacklist: ['user']
+  blacklist: ['user', ]
 }
 
 const persistedReducer = persistReducer(persistConfig, rootReducer)
 
 // middleware only applis when its actually inside of development env or return empty[]
-const middlewares = [ process.env.NODE_ENV !== 'production' && logger].filter(Boolean);
+const middlewares = [
+  process.env.NODE_ENV !== 'production' && logger, thunk,].filter(Boolean); 
+
 // const middlewares = [logger]
 const composeEnhacer = 
   (process.env.NODE_ENV !== 'production' &&
