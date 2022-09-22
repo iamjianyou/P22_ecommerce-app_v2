@@ -8,6 +8,9 @@ import { BrowserRouter } from 'react-router-dom';
 // import { CategoriesProvider } from './contexts/categories.context';
 // import { CartProvider } from './contexts/cart.context'
 import { store, persistor } from './store/store'
+import { Elements } from '@stripe/react-stripe-js'
+import { stripePromise } from './Utils/stripe/stripe.utils'
+
 
 const rootElement = document.getElementById('root');
 
@@ -19,7 +22,9 @@ render(
         {/* <UserProvider> */}
           {/* <CategoriesProvider> */}
             {/* <CartProvider> */}
+            <Elements stripe={stripePromise}>
               <App />
+             </Elements>
             {/* </CartProvider> */}
           {/* </CategoriesProvider> */}
         {/* </UserProvider> */}
