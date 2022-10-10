@@ -1,7 +1,8 @@
 import { createSelector } from 'reselect';
+import { CartState } from './cart.reducer'
 
 //get the cart slice that is governed by this silice of Reducer
-const selectCartReducer = (state) => state.cart;
+const selectCartReducer = (state: any): CartState => state.cart;
 
 
 export const selectIsCartOpen = createSelector(
@@ -22,8 +23,6 @@ export const selectCartItems = createSelector(
    
 )
   
- 
-   
 
 export const selectCartCount = createSelector([selectCartItems], (cartItems) =>
   cartItems.reduce((total, cartItem) => total + cartItem.quantity, 0)
